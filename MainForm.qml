@@ -2,8 +2,6 @@ import QtQuick 2.4
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 
-import "."
-
 Item {
     width: 720
     height: 400
@@ -81,60 +79,41 @@ Item {
         }
     }
 
-    Button {
+    EnableButton {
         id: automat
         x: 8
         y: 8
-        width: 150
         height: 45
         text: qsTr("Plná automatika")
-        checkable: true
-        style: Styles.buttonStyle
     }
 
-    Button {
+    EnableButton {
         id: radiatory
         x: 8
         y: 145
-        width: 150
-        height: 28
         text: qsTr("Topení do radiátorů")
         enabled: cerpadlo.checked
-        checkable: true
-        style: Styles.buttonStyle
     }
 
-    Button {
+    EnableButton {
         id: cerpadlo
         x: 8
         y: 75
-        width: 150
-        height: 28
         text: qsTr("Zapnuté čerpadlo")
         enabled: !automat.checked
-        checkable: true
-        style: Styles.buttonStyle
     }
-    Button {
+    EnableButton {
         id: podlahy
         x: 8
         y: 111
-        width: 150
-        height: 28
         text: qsTr("Topení do podlah")
         enabled: cerpadlo.checked
-        checkable: true
-        style: Styles.buttonStyle
     }
-    Button {
+    EnableButton {
         id: button2
         x: 8
         y: 179
-        width: 150
-        height: 28
         text: qsTr("Topení do akumulačky")
         enabled: cerpadlo.checked
-        checkable: true
-        style: Styles.buttonStyle
     }
 }

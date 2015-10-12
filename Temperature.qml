@@ -5,11 +5,14 @@ Text {
         return "#f19292";
     }
 
-    property int value: 10
+    property int value: dataSource.temperature
+    property string prop: "teplota"
 
     color: getColor()
     id: t_venku
     text: qsTr("%1 °C").arg(value);
     font.pixelSize: 18
+
+
 }
 
