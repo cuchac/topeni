@@ -24,6 +24,8 @@ ApplicationWindow {
         }
     }
 
+    onClosing: dataSource.stop()
+
     DataSource {
         id: dataSource
     }

@@ -34,6 +34,7 @@ Item {
 
             Temperature {
                 id: t_cerpadlo
+                index: 0
             }
 
             Label {
@@ -44,6 +45,7 @@ Item {
 
             Temperature {
                 id: t_topeni
+                index: 1
             }
 
             Label {
@@ -54,6 +56,7 @@ Item {
 
             Temperature {
                 id: t_akomulacka
+                index: 2
             }
 
             Label {
@@ -64,6 +67,7 @@ Item {
 
             Temperature {
                 id: t_venku
+                index: 3
             }
         }
 
@@ -115,5 +119,32 @@ Item {
         y: 179
         text: qsTr("Topení do akumulačky")
         enabled: cerpadlo.checked
+    }
+
+    EnableButton {
+        id: button1
+        x: 436
+        y: 8
+        height: 40
+        text: qsTr("Čerpadlo podlahy")
+        index: 0
+    }
+
+    EnableButton {
+        id: button3
+        x: 436
+        y: 54
+        height: 40
+        text: qsTr("Čerpadlo topení")
+        index: 1
+    }
+
+    EnableButton {
+        id: button4
+        x: 436
+        y: 100
+        height: 40
+        text: qsTr("Čerpadlo TČ")
+        index: 2
     }
 }
