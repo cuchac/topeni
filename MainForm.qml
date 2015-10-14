@@ -28,7 +28,7 @@ Item {
 
             Label {
                 id: label1
-                text: qsTr("Za tepelným čerpadlem")
+                text: qsTr("Z tepelného čerpadla")
                 font.pointSize: 14
             }
 
@@ -69,6 +69,17 @@ Item {
                 id: t_venku
                 index: 3
             }
+
+            Label {
+                id: label6
+                text: qsTr("Tlak vody")
+                font.pointSize: 14
+            }
+
+            Temperature {
+                id: t_tlak
+                index: 4
+            }
         }
 
         Label {
@@ -95,8 +106,9 @@ Item {
         id: radiatory
         x: 8
         y: 145
-        text: qsTr("Topení do radiátorů")
+        text: qsTr("Topit do topení")
         enabled: cerpadlo.checked
+        index: 3
     }
 
     EnableButton {
@@ -110,15 +122,17 @@ Item {
         id: podlahy
         x: 8
         y: 111
-        text: qsTr("Topení do podlah")
+        text: qsTr("Topit akumulačkou")
         enabled: cerpadlo.checked
+        index: 5
     }
     EnableButton {
         id: button2
         x: 8
         y: 179
-        text: qsTr("Topení do akumulačky")
+        text: qsTr("Nahřívat akumulačku")
         enabled: cerpadlo.checked
+        index: 4
     }
 
     EnableButton {
@@ -127,7 +141,7 @@ Item {
         y: 8
         height: 40
         text: qsTr("Čerpadlo podlahy")
-        index: 0
+        index: 2
     }
 
     EnableButton {
@@ -145,6 +159,6 @@ Item {
         y: 100
         height: 40
         text: qsTr("Čerpadlo TČ")
-        index: 2
+        index: 0
     }
 }

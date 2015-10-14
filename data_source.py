@@ -10,15 +10,21 @@ class IOThread(Thread):
     queue = Queue()
 
     TEMPERATURES = (
-        'V2162',
-        'V2166',
-        'V2172',
+        'V2162',  # za TC
+        'V2166',  # do topeni
+        'V2172',  # v akumulacce
+        'V2156',  # venku
+        'V2216',  # tlak vody
     )
 
     BITS = (
-        'C30',
-        'C31',
-        'C32',
+        'C30',  # TC
+        'C31',  # Podlahy
+        'C32',  # Topeni
+
+        'C24',  # do podlah
+        'C26',  # do akumulacky
+        'C25',  # z akumulacky
     )
 
     def __init__(self, datasource=None, **kwargs):
@@ -41,7 +47,11 @@ class IOThread(Thread):
 
             self.queue.task_done()
 
+    def make_stop(self):
+        self.stopped = True
+
     def stop(self):
+        self.queue.put([self.make_stop, {}])
         self.queue.join()
         self.stopped = True
         self.join()
@@ -81,7 +91,7 @@ class DataSource(QObject):
 
         # Values
         self._temperatures = [0, 0, 0, 0, 0]
-        self._bits = [False, False, False, False]
+        self._bits = [False, False, False, False, False, False]
 
         # Ticking
         self.running = True
@@ -98,12 +108,13 @@ class DataSource(QObject):
         self.io.queue.put([self.io.read_bits, {}])
 
         if self.running:
-            self.timer = Timer(2, self.on_timer)
+            self.timer = Timer(5, self.on_timer)
             self.timer.start()
 
     @pyqtSlot()
     def stop(self):
         self.running = False
+        self.timer.cancel()
         self.io.stop()
 
     @pyqtSlot(int, bool)
