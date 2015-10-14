@@ -9,17 +9,23 @@ Button {
     checkable: true
     style: Styles.buttonStyle
 
-    property int index: 0
+    property int index: -1
+    property bool value: index >= 0 ? dataSource.bits[index] : false
 
     onEnabledChanged: {
-        if (!enabled && checked)
-            checked = false
+//        if (!enabled && checked)
+//            value = false
     }
 
-    checked: dataSource.bits[index]
+    checked: value
 
     onCheckedChanged: {
-        dataSource.set_bit(index, checked)
+        if (index >= 0)
+            dataSource.set_bit(index, checked)
+    }
+
+    onValueChanged: {
+        checked = value
     }
 }
 

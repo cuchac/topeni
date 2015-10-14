@@ -107,7 +107,7 @@ Item {
         x: 8
         y: 145
         text: qsTr("Topit do topení")
-        enabled: cerpadlo.checked
+//        enabled: cerpadlo.checked
         index: 3
     }
 
@@ -123,7 +123,7 @@ Item {
         x: 8
         y: 111
         text: qsTr("Topit akumulačkou")
-        enabled: cerpadlo.checked
+//        enabled: cerpadlo.checked
         index: 5
     }
     EnableButton {
@@ -131,7 +131,7 @@ Item {
         x: 8
         y: 179
         text: qsTr("Nahřívat akumulačku")
-        enabled: cerpadlo.checked
+//        enabled: cerpadlo.checked
         index: 4
     }
 
