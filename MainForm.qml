@@ -8,10 +8,10 @@ Item {
 
     Rectangle {
         id: rectangle1
-        x: 164
+        x: 214
         y: 8
-        width: 266
-        height: 199
+        width: 292
+        height: 240
         color: "#fff3e9"
 
         GridLayout {
@@ -105,7 +105,7 @@ Item {
     EnableButton {
         id: radiatory
         x: 8
-        y: 145
+        y: 162
         text: qsTr("Topit do topení")
 //        enabled: cerpadlo.checked
         index: 3
@@ -114,14 +114,14 @@ Item {
     EnableButton {
         id: cerpadlo
         x: 8
-        y: 75
+        y: 57
         text: qsTr("Zapnuté čerpadlo")
         enabled: !automat.checked
     }
     EnableButton {
         id: podlahy
         x: 8
-        y: 111
+        y: 116
         text: qsTr("Topit akumulačkou")
 //        enabled: cerpadlo.checked
         index: 5
@@ -129,7 +129,7 @@ Item {
     EnableButton {
         id: button2
         x: 8
-        y: 179
+        y: 208
         text: qsTr("Nahřívat akumulačku")
 //        enabled: cerpadlo.checked
         index: 4
@@ -137,27 +137,24 @@ Item {
 
     EnableButton {
         id: button1
-        x: 436
-        y: 8
-        height: 40
+        x: 512
+        y: 11
         text: qsTr("Čerpadlo podlahy")
         index: 2
     }
 
     EnableButton {
         id: button3
-        x: 436
-        y: 54
-        height: 40
+        x: 512
+        y: 57
         text: qsTr("Čerpadlo topení")
         index: 1
     }
 
     EnableButton {
         id: button4
-        x: 436
-        y: 100
-        height: 40
+        x: 512
+        y: 103
         text: qsTr("Čerpadlo TČ")
         index: 0
     }

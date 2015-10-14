@@ -5,7 +5,8 @@ import "."
 
 Button {
     id: button
-    width: 150
+    width: 200
+    height: 40
     checkable: true
     style: Styles.buttonStyle
 
