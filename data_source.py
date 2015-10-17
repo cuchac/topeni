@@ -34,8 +34,8 @@ class IOThread(Thread):
         """
         super().__init__(**kwargs)
         self.datasource = datasource
-        self.directnet = KSClient('rfc2217://10.0.0.6:12345')
         self.stopped = False
+        self.directnet = None
 
     def run(self):
         while not self.stopped:
@@ -46,6 +46,9 @@ class IOThread(Thread):
                 print_exc()
 
             self.queue.task_done()
+
+    def connect(self):
+        self.directnet = KSClient('rfc2217://10.0.0.6:12345')
 
     def make_stop(self):
         self.stopped = True
@@ -59,8 +62,9 @@ class IOThread(Thread):
     def read_temperatures(self):
         print("Reading temperatures")
 
-        for index, address in enumerate(self.TEMPERATURES):
-            self.datasource.temperatures[index] = self.directnet.read_int(address)
+        if self.directnet:
+            for index, address in enumerate(self.TEMPERATURES):
+                self.datasource.temperatures[index] = self.directnet.read_int(address)
 
         print("Read temperatures", self.datasource.temperatures)
 
@@ -76,6 +80,9 @@ class IOThread(Thread):
 
         self.datasource.bits_changed.emit()
 
+    def measured(self):
+        self.datasource.measured.emit()
+
     def write_bit(self, index, value):
         print("Writing bit", index, value)
 
@@ -85,12 +92,13 @@ class IOThread(Thread):
 class DataSource(QObject):
     temperatures_changed = pyqtSignal()
     bits_changed = pyqtSignal()
+    measured = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
 
         # Values
-        self._temperatures = [0, 0, 0, 0, 0]
+        self._temperatures = [10, 20, 30, 40, 50]
         self._bits = [False, False, False, False, False, False]
 
         # Ticking
@@ -100,12 +108,14 @@ class DataSource(QObject):
 
         # Start thread
         self.io.start()
+        self.io.queue.put([self.io.connect, {}])
         self.on_timer()
 
     def on_timer(self):
         print("Timer ticking ...")
         self.io.queue.put([self.io.read_temperatures, {}])
         self.io.queue.put([self.io.read_bits, {}])
+        self.io.queue.put([self.io.measured, {}])
 
         if self.running:
             self.timer = Timer(5, self.on_timer)

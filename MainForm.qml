@@ -2,6 +2,8 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
 
+import QuickPlot 1.0
+
 Item {
     width: 720
     height: 400
@@ -11,7 +13,7 @@ Item {
         x: 214
         y: 8
         width: 292
-        height: 240
+        height: 212
         color: "#fff3e9"
 
         GridLayout {
@@ -105,7 +107,7 @@ Item {
     EnableButton {
         id: radiatory
         x: 8
-        y: 162
+        y: 134
         text: qsTr("Topit do topení")
 //        enabled: cerpadlo.checked
         index: 3
@@ -113,23 +115,23 @@ Item {
 
     EnableButton {
         id: cerpadlo
-        x: 8
-        y: 57
+        x: 512
+        y: 180
         text: qsTr("Zapnuté čerpadlo")
         enabled: !automat.checked
     }
     EnableButton {
         id: podlahy
         x: 8
-        y: 116
+        y: 88
         text: qsTr("Topit akumulačkou")
-//        enabled: cerpadlo.checked
+        //        enabled: cerpadlo.checked
         index: 5
     }
     EnableButton {
         id: button2
         x: 8
-        y: 208
+        y: 180
         text: qsTr("Nahřívat akumulačku")
 //        enabled: cerpadlo.checked
         index: 4
@@ -157,5 +159,64 @@ Item {
         y: 103
         text: qsTr("Čerpadlo TČ")
         index: 0
+    }
+
+    PlotArea {
+        id: plotArea
+        x: 8
+        y: 226
+        width: 704
+        height: 166
+
+        property variant temperatures: dataSource.temperatures
+
+        function measured() {
+            console.error('Measured')
+
+            for (var index in lines)
+            {
+                console.error('Temp changed', index, dataSource.temperatures[index])
+                lines[index].appendDataPoint(dataSource.temperatures[index]);
+            }
+        }
+
+        Component.onCompleted: {
+            dataSource.measured.connect(measured)
+        }
+
+        yScaleEngine: FixedScaleEngine {
+            max: 60
+            min: 0
+        }
+
+        items: [
+            ScrollingCurve {
+                id: temperature_0
+                numPoints: 300
+                color: "#FF0000"
+            },
+            ScrollingCurve {
+                id: temperature_1
+                numPoints: 300
+                color: "#00FF00"
+            },
+            ScrollingCurve {
+                id: temperature_2
+                numPoints: 300
+                color: "#0000FF"
+            },
+            ScrollingCurve {
+                id: temperature_3
+                numPoints: 300
+                color: "#00FFFF"
+            },
+            ScrollingCurve {
+                id: temperature_4
+                numPoints: 300
+                color: "#FFFF00"
+            }
+        ]
+
+        property variant lines: [temperature_0, temperature_1, temperature_2, temperature_3, temperature_4]
     }
 }
