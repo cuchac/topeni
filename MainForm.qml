@@ -171,12 +171,12 @@ Item {
         property variant temperatures: dataSource.temperatures
 
         function measured() {
-            console.error('Measured')
+//            console.error('Measured')
 
             for (var index in lines)
             {
-                console.error('Temp changed', index, dataSource.temperatures[index])
-                lines[index].appendDataPoint(dataSource.temperatures[index]);
+//                console.error('Temp changed', index, dataSource.temperatures[index])
+                lines[index].appendDataPoint(dataSource.temperatures[index]/10);
             }
         }
 

@@ -60,23 +60,23 @@ class IOThread(Thread):
         self.join()
 
     def read_temperatures(self):
-        print("Reading temperatures")
+        #print("Reading temperatures")
 
         if self.directnet:
             for index, address in enumerate(self.TEMPERATURES):
                 self.datasource.temperatures[index] = self.directnet.read_int(address)
 
-        print("Read temperatures", self.datasource.temperatures)
+        #print("Read temperatures", self.datasource.temperatures)
 
         self.datasource.temperatures_changed.emit()
 
     def read_bits(self):
-        print("Reading bits")
+        #print("Reading bits")
 
         for index, address in enumerate(self.BITS):
             self.datasource.bits[index] = self.directnet.read_bit(address)
 
-        print("Read bits", self.datasource.bits)
+        #print("Read bits", self.datasource.bits)
 
         self.datasource.bits_changed.emit()
 
@@ -84,7 +84,7 @@ class IOThread(Thread):
         self.datasource.measured.emit()
 
     def write_bit(self, index, value):
-        print("Writing bit", index, value)
+        #print("Writing bit", index, value)
 
         self.directnet.write_bit(self.BITS[index], value)
 
@@ -112,13 +112,13 @@ class DataSource(QObject):
         self.on_timer()
 
     def on_timer(self):
-        print("Timer ticking ...")
+        #print("Timer ticking ...")
         self.io.queue.put([self.io.read_temperatures, {}])
         self.io.queue.put([self.io.read_bits, {}])
         self.io.queue.put([self.io.measured, {}])
 
         if self.running:
-            self.timer = Timer(5, self.on_timer)
+            self.timer = Timer(10, self.on_timer)
             self.timer.start()
 
     @pyqtSlot()

@@ -27,7 +27,10 @@ ApplicationWindow {
         width: 31
         height: 27
         text: "X"
-        onClicked: app.close()
+        onClicked: {
+            dataSource.stop()
+            app.close()
+        }
 
     }
 }
