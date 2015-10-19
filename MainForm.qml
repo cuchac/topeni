@@ -163,10 +163,11 @@ Item {
 
     PlotArea {
         id: plotArea
-        x: 8
+        x: -12
         y: 226
-        width: 704
-        height: 166
+        width: 732
+        height: 195
+        hasXTicks: false
 
         property variant temperatures: dataSource.temperatures
 
@@ -182,6 +183,15 @@ Item {
 
         Component.onCompleted: {
             dataSource.measured.connect(measured)
+
+            // Fill history
+            var temp_history = dataSource.get_temperatures_history()
+            for (var index_history in temp_history)
+            {
+                var row = temp_history[index_history]
+                for (var index in row)
+                    lines[index].appendDataPoint(row[index]/10);
+            }
         }
 
         yScaleEngine: FixedScaleEngine {

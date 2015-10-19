@@ -29,7 +29,7 @@ ApplicationWindow {
         text: "X"
         onClicked: {
             dataSource.stop()
-            app.close()
+            Qt.quit()
         }
 
     }
