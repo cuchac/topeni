@@ -6,5 +6,6 @@
         <file>Styles.qml</file>
         <file>qmldir</file>
         <file>EnableButton.qml</file>
+        <file>ColorRect.qml</file>
     </qresource>
 </RCC>
