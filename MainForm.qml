@@ -102,6 +102,7 @@ Item {
         y: 8
         height: 45
         text: qsTr("Plná automatika")
+        index: 6
     }
 
     EnableButton {
@@ -109,7 +110,7 @@ Item {
         x: 8
         y: 134
         text: qsTr("Topit do topení")
-//        enabled: cerpadlo.checked
+        enabled: !automat.checked
         index: 3
     }
 
@@ -119,13 +120,14 @@ Item {
         y: 180
         text: qsTr("Zapnuté čerpadlo")
         enabled: !automat.checked
+        index: 7
     }
     EnableButton {
         id: podlahy
         x: 8
         y: 88
         text: qsTr("Topit akumulačkou")
-        //        enabled: cerpadlo.checked
+        enabled: !automat.checked
         index: 5
     }
     EnableButton {
@@ -133,7 +135,7 @@ Item {
         x: 8
         y: 180
         text: qsTr("Nahřívat akumulačku")
-//        enabled: cerpadlo.checked
+        enabled: !automat.checked
         index: 4
     }
 
@@ -142,6 +144,7 @@ Item {
         x: 512
         y: 11
         text: qsTr("Čerpadlo podlahy")
+        enabled: !automat.checked
         index: 2
     }
 
@@ -150,6 +153,7 @@ Item {
         x: 512
         y: 57
         text: qsTr("Čerpadlo topení")
+        enabled: !automat.checked
         index: 1
     }
 
@@ -158,6 +162,7 @@ Item {
         x: 512
         y: 103
         text: qsTr("Čerpadlo TČ")
+        enabled: !automat.checked
         index: 0
     }
 

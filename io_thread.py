@@ -23,6 +23,9 @@ class IOThread(Thread):
         'C24',  # do podlah
         'C26',  # do akumulacky
         'C25',  # z akumulacky
+
+        'C40',  # plna automatika
+        'C41',  # automatika topi do nadrze
     )
 
     def __init__(self, datasource=None, **kwargs):
