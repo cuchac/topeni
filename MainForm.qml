@@ -43,14 +43,11 @@ Item {
                 index: 0
             }
 
-
-
             Label {
                 id: label2
                 text: qsTr("Do topení")
                 font.pointSize: 14
             }
-
 
             ColorRect {
                 color: "#00FF00"
@@ -60,7 +57,6 @@ Item {
                 id: t_topeni
                 index: 1
             }
-
 
             Label {
                 id: label3
@@ -76,7 +72,6 @@ Item {
                 id: t_akomulacka
                 index: 2
             }
-
 
             Label {
                 id: label4
@@ -107,11 +102,6 @@ Item {
                 id: t_tlak
                 index: 4
             }
-
-
-
-
-
         }
 
         Label {
@@ -196,72 +186,43 @@ Item {
         index: 0
     }
 
-    PlotArea {
-        id: plotArea
+    MouseArea {
+        id: mouseArea1
         x: -12
         y: 226
         width: 732
         height: 195
-        hasXTicks: false
 
-        property variant temperatures: dataSource.temperatures
+        onClicked: {
+            history.state = ''
+        }
 
-        function measured() {
-            //            console.error('Measured')
+        Plot {
+            temperatures: dataSource.temperatures
 
-            for (var index in lines)
-            {
-                //                console.error('Temp changed', index, dataSource.temperatures[index])
-                lines[index].appendDataPoint(dataSource.temperatures[index]/10);
+            Component.onCompleted: {
+                dataSource.measured.connect(measured)
+
+                // Fill history
+                fillData(dataSource.get_temperatures_history())
+            }
+        }
+    }
+
+    History {
+        id: history
+        x: 8
+        y: 8
+
+        function update(){
+            if (state == ''){
+                var data = dataSource.get_date_history(cur_date);
+                fillData(data)
             }
         }
 
-        Component.onCompleted: {
-            dataSource.measured.connect(measured)
+        onCur_dateChanged: update()
 
-            // Fill history
-            var temp_history = dataSource.get_temperatures_history()
-            for (var index_history in temp_history)
-            {
-                var row = temp_history[index_history]
-                for (var index in row)
-                    lines[index].appendDataPoint(row[index]/10);
-            }
-        }
-
-        yScaleEngine: FixedScaleEngine {
-            max: 60
-            min: 0
-        }
-
-        items: [
-            ScrollingCurve {
-                id: temperature_0
-                numPoints: 300
-                color: "#FF0000"
-            },
-            ScrollingCurve {
-                id: temperature_1
-                numPoints: 300
-                color: "#00FF00"
-            },
-            ScrollingCurve {
-                id: temperature_2
-                numPoints: 300
-                color: "#0000FF"
-            },
-            ScrollingCurve {
-                id: temperature_3
-                numPoints: 300
-                color: "#00FFFF"
-            },
-            ScrollingCurve {
-                id: temperature_4
-                numPoints: 300
-                color: "#FFFF00"
-            }
-        ]
-
-        property variant lines: [temperature_0, temperature_1, temperature_2, temperature_3, temperature_4]
+        onStateChanged: update()
     }
 }

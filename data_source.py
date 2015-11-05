@@ -1,5 +1,5 @@
 from threading import Timer
-from PyQt5.QtCore import pyqtProperty, QObject, pyqtSignal, pyqtSlot
+from PyQt5.QtCore import pyqtProperty, QObject, pyqtSignal, pyqtSlot, QDateTime
 from PyQt5.QtCore import QVariant
 from database import Database
 from io_thread import IOThread
@@ -70,3 +70,7 @@ class DataSource(QObject):
     @pyqtSlot(result=QVariant)
     def get_temperatures_history(self):
         return self.database.get_temperatures()
+
+    @pyqtSlot(QDateTime, result=QVariant)
+    def get_date_history(self, date):
+        return self.database.get_history(date)
