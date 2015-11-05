@@ -35,7 +35,7 @@ class Database(object):
         self.set_settings('db_version', version)
 
     def set_temperatures(self, temperatures):
-        self.db.execute('INSERT INTO temperatures VALUES (time("now"), ?)', (json.dumps(temperatures), ))
+        self.db.execute('INSERT INTO temperatures VALUES (datetime("now"), ?)', (json.dumps(temperatures), ))
 
     def set_settings(self, name, value):
         self.db.execute('REPLACE INTO settings VALUES (?, ?)', (name, value))
