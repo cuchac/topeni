@@ -33,7 +33,7 @@ PlotArea {
         for (var index_history in temp_history)
         {
             var row = temp_history[index_history]
-            for (var index in row)
+            for (var index in lines)
                 lines[index].appendDataPoint(row[index]/10);
         }
     }

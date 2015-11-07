@@ -53,6 +53,11 @@ class Database(object):
 
     def get_history(self, date):
         date_formated = date.toString('yyyy-MM-dd') + ' 00:00:00'
-        history = self.db.execute('SELECT value FROM temperatures WHERE date BETWEEN ? AND DATETIME(?, "+1 day") ORDER BY date', (date_formated, date_formated))
-        history = list(json.loads(row[0]) for row in history)
+
+        history = self.db.execute('SELECT date, value '
+                                  'FROM temperatures '
+                                  'WHERE (date BETWEEN ? AND DATETIME(?, "+1 day")) AND (rowid % 6) = 0 '
+                                  'ORDER BY date', (date_formated, date_formated))
+        history = list(json.loads(row[1]) + [row[0]] for row in history)
+
         return history

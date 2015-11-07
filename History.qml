@@ -30,12 +30,17 @@ Rectangle {
         return plot1.fillData(data);
     }
 
+    function setStats(stats)
+    {
+        duration.text = stats['duration'];
+    }
+
     Button {
         id: close
-        x: 649
+        x: 626
         y: 8
-        width: 47
-        height: 24
+        width: 70
+        height: 28
         text: qsTr("Zavřít")
 
         onClicked: history.state = 'hidden'
@@ -44,7 +49,7 @@ Rectangle {
     Button {
         id: prev
         x: 17
-        y: 50
+        y: 39
         text: qsTr("Předchozí")
 
         onClicked: {
@@ -57,7 +62,7 @@ Rectangle {
     Button {
         id: next
         x: 360
-        y: 50
+        y: 39
         text: qsTr("Následující")
 
         onClicked: {
@@ -70,7 +75,7 @@ Rectangle {
     Slider {
         id: zoom
         x: 486
-        y: 49
+        y: 38
         updateValueWhileDragging: false
         stepSize: 0.1
         maximumValue: 10
@@ -99,7 +104,7 @@ Rectangle {
     Label {
         id: label1
         x: 155
-        y: 43
+        y: 32
         width: 144
         height: 31
         text: cur_date.toDateString()
@@ -125,6 +130,23 @@ Rectangle {
             id: plot1
             anchors.fill: parent
         }
+    }
+
+    Label {
+        id: label2
+        x: 17
+        y: 65
+        text: qsTr("Cerpadlo zaplé")
+        font.pointSize: 19
+    }
+
+    Label {
+        id: duration
+        x: 165
+        y: 65
+        text: qsTr("1:25:15")
+        font.bold: true
+        font.pointSize: 19
     }
 }
 

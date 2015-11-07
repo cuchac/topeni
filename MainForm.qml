@@ -217,7 +217,8 @@ Item {
         function update(){
             if (state == ''){
                 var data = dataSource.get_date_history(cur_date);
-                fillData(data)
+                fillData(data[0])
+                setStats(data[1])
             }
         }
 

@@ -1,3 +1,4 @@
+import datetime
 from threading import Timer
 from PyQt5.QtCore import pyqtProperty, QObject, pyqtSignal, pyqtSlot, QDateTime
 from PyQt5.QtCore import QVariant
@@ -73,4 +74,20 @@ class DataSource(QObject):
 
     @pyqtSlot(QDateTime, result=QVariant)
     def get_date_history(self, date):
-        return self.database.get_history(date)
+        history = self.database.get_history(date)
+
+        duration = datetime.timedelta()
+
+        if len(history) > 0:
+            last = history[0]
+
+            for sample in history:
+                if sample[4] > 10 and last[4] > 10:
+                    duration += datetime.datetime.strptime(sample[5], '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(last[5], '%Y-%m-%d %H:%M:%S')
+                last = sample
+
+        stats = {
+            'duration': str(duration),
+        }
+
+        return [history, stats]
