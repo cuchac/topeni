@@ -137,7 +137,7 @@ Item {
     EnableButton {
         id: cerpadlo
         x: 512
-        y: 180
+        y: 199
         text: qsTr("Zapnuté čerpadlo")
         enabled: !automat.checked
         index: 7
@@ -225,5 +225,14 @@ Item {
         onCur_dateChanged: update()
 
         onStateChanged: update()
+    }
+
+    EnableButton {
+        id: button5
+        x: 512
+        y: 149
+        text: qsTr("Nautila")
+        enabled: !automat.checked
+        index: 8
     }
 }
