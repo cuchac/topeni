@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 import QuickPlot 1.0
-import QtQuick.Controls 1.3
+import QtQuick.Controls 1.2
 
 Rectangle {
     id: history
