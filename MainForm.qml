@@ -209,24 +209,6 @@ Item {
         }
     }
 
-    History {
-        id: history
-        x: 8
-        y: 8
-
-        function update(){
-            if (state == ''){
-                var data = dataSource.get_date_history(cur_date);
-                fillData(data[0])
-                setStats(data[1])
-            }
-        }
-
-        onCur_dateChanged: update()
-
-        onStateChanged: update()
-    }
-
     EnableButton {
         id: button5
         x: 512
@@ -234,5 +216,26 @@ Item {
         text: qsTr("Nautila")
         enabled: !automat.checked
         index: 8
+    }
+    History {
+        id: history
+        x: 8
+        y: 8
+        z: 3
+
+        function update() {
+            if (state == '') {
+                var data = dataSource.get_date_history(cur_date)
+                fillData(data[0])
+                setStats(data[1])
+            }
+        }
+
+        onCur_dateChanged: update()
+
+        onStateChanged: {
+            setToday()
+            update()
+        }
     }
 }

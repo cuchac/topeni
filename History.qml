@@ -35,6 +35,11 @@ Rectangle {
         duration.text = stats['duration'];
     }
 
+    function setToday()
+    {
+        cur_date = new Date();
+    }
+
     Button {
         id: close
         x: 626
@@ -142,7 +147,7 @@ Rectangle {
 
     Label {
         id: duration
-        x: 165
+        x: 213
         y: 65
         text: qsTr("1:25:15")
         font.bold: true
