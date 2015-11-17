@@ -56,7 +56,7 @@ class Database(object):
 
         history = self.db.execute('SELECT date, value '
                                   'FROM temperatures '
-                                  'WHERE (date BETWEEN ? AND DATETIME(?, "+1 day")) AND (rowid % 6) = 0 '
+                                  'WHERE (date BETWEEN ? AND DATETIME(?, "+1 day")) AND (rowid % 12) = 0 '
                                   'ORDER BY date', (date_formated, date_formated))
         history = list(json.loads(row[1]) + [row[0]] for row in history)
 

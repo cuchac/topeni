@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtQml import QQmlApplicationEngine, qmlRegisterType
 from data_source import DataSource
@@ -8,6 +9,8 @@ from data_source import DataSource
 if __name__ == '__main__':
     # Create main app
     app = QApplication(sys.argv)
+
+    app.setFont(QFont("Droid Sans"))
 
     qmlRegisterType(DataSource, 'DataSource', 1, 0, 'DataSource')
 
