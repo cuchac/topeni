@@ -1,11 +1,12 @@
 pragma Singleton
 
 import QtQuick 2.0
-import QtQuick.Controls.Styles 1.2
+import QtQuick.Controls.Styles 1.0
 
 QtObject {
     property var buttonStyle: Component {
         ButtonStyle {
+/*
             background: Rectangle {
                 function getColor()
                 {
@@ -36,6 +37,7 @@ QtObject {
                     GradientStop { position: 1 ; color: Qt.darker(getColor(), 1.2) }
                 }
             }
+*/
         }
     }
 }
