@@ -15,7 +15,7 @@ class DataSource(QObject):
         super().__init__(parent)
 
         # Values
-        self._temperatures = [10, 20, 30, 40, 50]
+        self._temperatures = [10, 20, 30, 40, 50, 60, 70]
         self._bits = [False, False, False, False, False, False, False, False, False]
 
         # Ticking
@@ -27,6 +27,7 @@ class DataSource(QObject):
         # Start thread
         self.io.start()
         self.io.add(self.io.connect)
+        self.io.add(self.io.connect_power)
         self.on_timer()
 
     def on_timer(self):

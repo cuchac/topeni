@@ -7,13 +7,12 @@ Text {
 
     property int index: 0
     property int value: dataSource.temperatures[index]
-    property string prop: "teplota"
+    property string unit: "°C"
+    property int divider: 10
 
     color: getColor()
     id: t_venku
-    text: qsTr("%1 °C").arg(value/10);
+    text: qsTr("%1 %2").arg(value/divider).arg(unit);
     font.pixelSize: 18
-
-
 }
 

@@ -15,7 +15,7 @@ PlotArea {
         for (var index in lines)
         {
             //                console.error('Temp changed', index, temperatures[index])
-            lines[index].appendDataPoint(temperatures[index]/10);
+            lines[index].appendDataPoint(temperatures[index]/(index < 5 ? 10: 1));
         }
     }
 
@@ -34,7 +34,7 @@ PlotArea {
         {
             var row = temp_history[index_history]
             for (var index in lines)
-                lines[index].appendDataPoint(row[index]/10);
+                lines[index].appendDataPoint(row[index]/(index < 5 ? 10: 1));
         }
     }
 
@@ -68,10 +68,15 @@ PlotArea {
             id: temperature_4
             numPoints: points
             color: "#FFFF00"
+        },
+        ScrollingCurve {
+            id: temperature_5
+            numPoints: points
+            color: "#FF00FF"
         }
     ]
 
-    property variant lines: [temperature_0, temperature_1, temperature_2, temperature_3, temperature_4]
+    property variant lines: [temperature_0, temperature_1, temperature_2, temperature_3, temperature_4, temperature_5]
     anchors.fill: parent
     anchors.top: parent.top
     anchors.left: parent.left

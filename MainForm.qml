@@ -101,6 +101,24 @@ Item {
             Temperature {
                 id: t_tlak
                 index: 4
+                unit: "bar"
+            }
+
+            Label {
+                id: label7
+                text: qsTr("Aktuální spotřeba")
+                font.pointSize: 14
+            }
+
+            ColorRect {
+                color: "#ff00ff"
+            }
+
+            Temperature {
+                id: t_tlak1
+                index: 5
+                unit: 'kW'
+                divider: 1
             }
         }
 
@@ -137,7 +155,7 @@ Item {
     EnableButton {
         id: cerpadlo
         x: 512
-        y: 199
+        y: 187
         text: qsTr("Zapnuté čerpadlo")
         enabled: !automat.checked
         index: 7
@@ -171,7 +189,7 @@ Item {
     EnableButton {
         id: button3
         x: 512
-        y: 57
+        y: 55
         text: qsTr("Čerpadlo topení")
         enabled: !automat.checked
         index: 1
@@ -180,7 +198,7 @@ Item {
     EnableButton {
         id: button4
         x: 512
-        y: 103
+        y: 99
         text: qsTr("Čerpadlo TČ")
         enabled: !automat.checked
         index: 0
@@ -212,7 +230,7 @@ Item {
     EnableButton {
         id: button5
         x: 512
-        y: 149
+        y: 143
         text: qsTr("Nautila")
         enabled: !automat.checked
         index: 8

@@ -2,6 +2,7 @@ from directnet import KSClient
 from traceback import print_exc
 from queue import Queue
 from threading import Thread
+from power_link import PowerLink
 
 
 class IOThread(Thread):
@@ -39,6 +40,7 @@ class IOThread(Thread):
         self.stopped = False
         self.stopping = False
         self.directnet = None
+        self.powerlink = None
 
     def run(self):
         while not self.stopped or not self.queue.empty():
@@ -52,6 +54,9 @@ class IOThread(Thread):
 
     def connect(self):
         self.directnet = KSClient('rfc2217://10.0.0.6:12345')
+
+    def connect_power(self):
+        self.powerlink = PowerLink()
 
     def make_stop(self):
         self.stopped = True
@@ -75,6 +80,10 @@ class IOThread(Thread):
             for index, address in enumerate(self.TEMPERATURES):
                 temperatures[index] = self.directnet.read_int(address)
 
+        if self.powerlink:
+            power = self.read_power()
+            temperatures[len(self.TEMPERATURES):] = power
+
         #print("Read temperatures", self.datasource.temperatures)
         self.datasource.temperatures = temperatures
         self.datasource.temperatures_changed.emit()
@@ -84,12 +93,21 @@ class IOThread(Thread):
 
         bits = self.datasource.bits
 
-        for index, address in enumerate(self.BITS):
-            bits[index] = self.directnet.read_bit(address)
+        if self.directnet:
+            for index, address in enumerate(self.BITS):
+                bits[index] = self.directnet.read_bit(address)
 
         #print("Read bits", self.datasource.bits)
         self.datasource.bits = bits
         self.datasource.bits_changed.emit()
+
+    def read_power(self):
+        data = self.powerlink.read()
+
+        total = data['1.8.0']
+        actual = data['31.7']*data['32.7'] + data['51.7']*data['52.7'] + data['71.7']*data['72.7']
+
+        return [actual, total]
 
     def measured(self):
         self.datasource.measured.emit()
