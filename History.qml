@@ -33,6 +33,7 @@ Rectangle {
     function setStats(stats)
     {
         duration.text = stats['duration'];
+        power.text = "%1 kWh / %2 Kč".arg(stats['power']).arg(stats['power']*2300)
     }
 
     function setToday()
@@ -53,8 +54,8 @@ Rectangle {
 
     Button {
         id: prev
-        x: 17
-        y: 39
+        x: 8
+        y: 6
         text: qsTr("Předchozí")
 
         onClicked: {
@@ -66,8 +67,8 @@ Rectangle {
 
     Button {
         id: next
-        x: 360
-        y: 39
+        x: 216
+        y: 6
         text: qsTr("Následující")
 
         onClicked: {
@@ -79,8 +80,10 @@ Rectangle {
 
     Slider {
         id: zoom
-        x: 486
-        y: 38
+        x: 359
+        y: 36
+        width: 214
+        height: 22
         updateValueWhileDragging: false
         stepSize: 0.1
         maximumValue: 10
@@ -90,8 +93,8 @@ Rectangle {
 
     Text {
         id: text1
-        x: 551
-        y: 8
+        x: 435
+        y: 4
         text: qsTr("Zoom")
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: 24
@@ -99,8 +102,8 @@ Rectangle {
 
     Text {
         id: text2
-        x: 186
-        y: 6
+        x: 116
+        y: 4
         text: qsTr("Datum")
         font.pixelSize: 24
         horizontalAlignment: Text.AlignHCenter
@@ -108,13 +111,13 @@ Rectangle {
 
     Label {
         id: label1
-        x: 155
-        y: 32
-        width: 144
+        x: 47
+        y: 31
+        width: 207
         height: 31
         text: cur_date.toDateString()
         font.bold: true
-        font.pointSize: 20
+        font.pointSize: 18
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
     }
@@ -139,19 +142,38 @@ Rectangle {
 
     Label {
         id: label2
-        x: 17
-        y: 65
-        text: qsTr("Cerpadlo zaplé")
+        x: 8
+        y: 63
+        text: qsTr("Čerpadlo zaplé")
         font.pointSize: 19
     }
 
     Label {
         id: duration
-        x: 213
-        y: 65
+        x: 185
+        y: 63
         text: qsTr("1:25:15")
         font.bold: true
         font.pointSize: 19
+    }
+
+    Label {
+        id: label3
+        x: 320
+        y: 63
+        text: qsTr("Spotřeba")
+        font.pointSize: 19
+    }
+
+    Label {
+        id: power
+        x: 430
+        y: 64
+        width: 266
+        height: 28
+        text: qsTr("1:25:15")
+        font.pointSize: 19
+        font.bold: true
     }
 }
 
