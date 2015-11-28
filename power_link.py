@@ -8,7 +8,8 @@ class PowerLink(object):
     float_re = re.compile(r'([0-9\.]+)')
 
     def __init__(self):
-        self.serial = serial.serial_for_url('/dev/ttyUSB0',
+#        self.serial = serial.serial_for_url('rfc2217://10.0.0.6:12346',
+        self.serial = serial.serial_for_url('/dev/ttyUSB1',
                                             timeout=1,
                                             parity=serial.PARITY_EVEN,
                                             baudrate=300,

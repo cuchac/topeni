@@ -78,17 +78,23 @@ class DataSource(QObject):
         history = self.database.get_history(date)
 
         duration = datetime.timedelta()
+        power = 0
 
         if len(history) > 0:
             last = history[0]
+            first = history[-1]
+            
+            if len(last) > 6 and len(first) > 6:
+                power = first[6] - last[6]
 
             for sample in history:
                 if sample[4] > 10 and last[4] > 10:
-                    duration += datetime.datetime.strptime(sample[5], '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(last[5], '%Y-%m-%d %H:%M:%S')
+                    duration += datetime.datetime.strptime(sample[-1], '%Y-%m-%d %H:%M:%S') - datetime.datetime.strptime(last[-1], '%Y-%m-%d %H:%M:%S')
                 last = sample
 
         stats = {
             'duration': str(duration),
+            'power': power,
         }
 
         return [history, stats]

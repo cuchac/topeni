@@ -15,7 +15,7 @@ PlotArea {
         for (var index in lines)
         {
             //                console.error('Temp changed', index, temperatures[index])
-            lines[index].appendDataPoint(temperatures[index]/(index < 5 ? 10: 1));
+            lines[index].appendDataPoint(temperatures[index]/(index < 5 ? 10: 100));
         }
     }
 
@@ -34,7 +34,7 @@ PlotArea {
         {
             var row = temp_history[index_history]
             for (var index in lines)
-                lines[index].appendDataPoint(row[index]/(index < 5 ? 10: 1));
+                lines[index].appendDataPoint(row[index]/(index < 5 ? 10: 100));
         }
     }
 
