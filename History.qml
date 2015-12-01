@@ -33,7 +33,7 @@ Rectangle {
     function setStats(stats)
     {
         duration.text = stats['duration'];
-        power.text = "%1 kWh / %2 Kč".arg(stats['power']).arg(stats['power']*2300)
+        power.text = "%1 kWh / %2 Kč".arg(stats['power']).arg(stats['power']*2.3)
     }
 
     function setToday()
