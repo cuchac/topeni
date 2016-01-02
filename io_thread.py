@@ -14,6 +14,9 @@ class IOThread(Thread):
         'V2172',  # v akumulacce
         'V2156',  # venku
         'V2216',  # tlak vody
+    )
+
+    VARIABLES = (
         'V1773',  # pozadovana teplota
     )
 
@@ -77,10 +80,14 @@ class IOThread(Thread):
         #print("Reading temperatures")
 
         temperatures = self.datasource.temperatures
+        variables = self.datasource.variables
 
         if self.directnet:
             for index, address in enumerate(self.TEMPERATURES):
                 temperatures[index] = self.directnet.read_int(address)
+
+            for index, address in enumerate(self.VARIABLES):
+                variables[index] = self.directnet.read_int(address)
 
         if self.powerlink:
             power = self.read_power()
@@ -88,7 +95,9 @@ class IOThread(Thread):
 
         #print("Read temperatures", self.datasource.temperatures)
         self.datasource.temperatures = temperatures
+        self.datasource.variables = variables
         self.datasource.temperatures_changed.emit()
+        self.datasource.variables_changed.emit()
 
     def read_bits(self):
         #print("Reading bits")
@@ -115,6 +124,7 @@ class IOThread(Thread):
         self.datasource.measured.emit()
 
     def write_bit(self, index, value):
-        #print("Writing bit", index, value)
-
         self.directnet.write_bit(self.BITS[index], value)
+
+    def write_variable(self, index, value):
+        self.directnet.write_value(self.VARIABLES[index], value)

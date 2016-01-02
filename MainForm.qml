@@ -116,7 +116,7 @@ Item {
 
             Temperature {
                 id: t_tlak1
-                index: 6
+                index: 5
                 unit: 'W'
                 divider: 1
             }
@@ -233,7 +233,7 @@ Item {
         id: temperovani
         x: 512
         y: 180
-        text: qsTr("Temperování na %1 °C").arg(dataSource.temperatures[5])
+        text: qsTr("Temperování na %1 °C").arg(dataSource.variables[0]/10)
         enabled: !automat.checked
         index: 8
     }
