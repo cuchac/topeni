@@ -117,7 +117,7 @@ Item {
             Temperature {
                 id: t_tlak1
                 index: 5
-                unit: 'kW'
+                unit: 'W'
                 divider: 1
             }
         }
@@ -150,15 +150,6 @@ Item {
         text: qsTr("Topit do topení")
         enabled: !automat.checked
         index: 3
-    }
-
-    EnableButton {
-        id: cerpadlo
-        x: 512
-        y: 187
-        text: qsTr("Zapnuté čerpadlo")
-        enabled: !automat.checked
-        index: 7
     }
     EnableButton {
         id: podlahy
@@ -230,8 +221,8 @@ Item {
     EnableButton {
         id: button5
         x: 512
-        y: 143
-        text: qsTr("Nautila")
+        y: 180
+        text: qsTr("Temperování")
         enabled: !automat.checked
         index: 8
     }
