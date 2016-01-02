@@ -116,7 +116,7 @@ Item {
 
             Temperature {
                 id: t_tlak1
-                index: 5
+                index: 6
                 unit: 'W'
                 divider: 1
             }
@@ -131,6 +131,17 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 5
+        }
+
+        Label {
+            id: label8
+            x: -155
+            y: 48
+            color: "#ea430c"
+            text: qsTr("HDO :-(")
+            font.bold: true
+            font.pointSize: 24
+            visible: dataSource.bits[9]
         }
     }
 
@@ -173,7 +184,7 @@ Item {
         x: 512
         y: 11
         text: qsTr("Čerpadlo podlahy")
-        enabled: !automat.checked
+        enabled: !automat.checked && !temperovani.checked
         index: 2
     }
 
@@ -182,7 +193,7 @@ Item {
         x: 512
         y: 55
         text: qsTr("Čerpadlo topení")
-        enabled: !automat.checked
+        enabled: !automat.checked && !temperovani.checked
         index: 1
     }
 
@@ -191,7 +202,7 @@ Item {
         x: 512
         y: 99
         text: qsTr("Čerpadlo TČ")
-        enabled: !automat.checked
+        enabled: !automat.checked && !temperovani.checked
         index: 0
     }
 
@@ -219,10 +230,10 @@ Item {
     }
 
     EnableButton {
-        id: button5
+        id: temperovani
         x: 512
         y: 180
-        text: qsTr("Temperování")
+        text: qsTr("Temperování na %1 °C").arg(dataSource.temperatures[5])
         enabled: !automat.checked
         index: 8
     }

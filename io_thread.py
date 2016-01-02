@@ -14,6 +14,7 @@ class IOThread(Thread):
         'V2172',  # v akumulacce
         'V2156',  # venku
         'V2216',  # tlak vody
+        'V1773',  # pozadovana teplota
     )
 
     BITS = (
@@ -28,6 +29,7 @@ class IOThread(Thread):
         'C40',  # plna automatika
         'C41',  # automatika topi do nadrze
         'S14',  # temperovani
+        'C15',  # HDO
     )
 
     def __init__(self, datasource=None, **kwargs):

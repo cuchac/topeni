@@ -15,8 +15,8 @@ class DataSource(QObject):
         super().__init__(parent)
 
         # Values
-        self._temperatures = [10, 20, 30, 40, 50, 60, 70]
-        self._bits = [False, False, False, False, False, False, False, False, False]
+        self._temperatures = [10, 20, 30, 40, 50, 60, 70, 80]
+        self._bits = [False, False, False, False, False, False, False, False, False, False]
 
         # Ticking
         self.running = True
