@@ -18,7 +18,7 @@ class DataSource(QObject):
         # Values
         self._temperatures = [10, 20, 30, 40, 50, 60, 70]
         self._bits = [False, False, False, False, False, False, False, False, False, False]
-        self._variables = [10]
+        self._variables = [10, 20]
 
         # Ticking
         self.running = True

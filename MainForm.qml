@@ -233,7 +233,7 @@ Item {
         id: temperovani
         x: 512
         y: 180
-        text: qsTr("Temperování na %1 °C").arg(dataSource.variables[0]/10)
+        text: qsTr("Temperování na %1 - %2 °C").arg(dataSource.variables[0]/10).arg(dataSource.variables[1]/10)
         enabled: !automat.checked
         index: 8
     }

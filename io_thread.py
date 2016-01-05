@@ -18,6 +18,7 @@ class IOThread(Thread):
 
     VARIABLES = (
         'V1773',  # pozadovana teplota
+        'V1776',  # maximalni teplota
     )
 
     BITS = (
