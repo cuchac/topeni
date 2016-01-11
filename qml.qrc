@@ -9,5 +9,6 @@
         <file>ColorRect.qml</file>
         <file>History.qml</file>
         <file>Plot.qml</file>
+        <file>Clock.qml</file>
     </qresource>
 </RCC>

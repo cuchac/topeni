@@ -25,7 +25,7 @@ Item {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.left: parent.left
-            anchors.topMargin: 15
+            anchors.topMargin: 6
             columns: 3
 
             Label {
@@ -124,11 +124,11 @@ Item {
 
         Label {
             id: label5
-            x: 50
             text: qsTr("Teploty")
+            anchors.left: parent.left
+            anchors.leftMargin: 50
             font.bold: true
             font.pointSize: 21
-            anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 5
         }
@@ -142,6 +142,17 @@ Item {
             font.bold: true
             font.pointSize: 24
             visible: dataSource.bits[9]
+        }
+
+        Clock {
+            id: clock1
+            x: 173
+            width: 111
+            height: 29
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.right: parent.right
+            anchors.rightMargin: 5
         }
     }
 
