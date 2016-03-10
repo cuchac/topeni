@@ -59,7 +59,7 @@ class IOThread(Thread):
             self.queue.task_done()
 
     def connect(self):
-        self.directnet = KSClient('rfc2217://10.0.0.6:12345')
+        self.directnet = KSClient('/dev/topeni_plc')
 
     def connect_power(self):
         self.powerlink = PowerLink()

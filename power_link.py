@@ -9,7 +9,7 @@ class PowerLink(object):
 
     def __init__(self):
 #        self.serial = serial.serial_for_url('rfc2217://10.0.0.6:12346',
-        self.serial = serial.serial_for_url('/dev/ttyUSB1',
+        self.serial = serial.serial_for_url('/dev/topeni_power',
                                             timeout=1,
                                             parity=serial.PARITY_EVEN,
                                             baudrate=300,

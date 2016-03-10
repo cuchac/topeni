@@ -35,7 +35,10 @@ class Database(object):
         self.set_settings('db_version', version)
 
     def set_temperatures(self, temperatures):
-        self.db.execute('INSERT INTO temperatures VALUES (datetime("now"), ?)', (json.dumps(temperatures), ))
+        try:
+            self.db.execute('INSERT INTO temperatures VALUES (datetime("now"), ?)', (json.dumps(temperatures), ))
+        except sqlite3.IntegrityError as e:
+            print(e)
 
     def set_settings(self, name, value):
         self.db.execute('REPLACE INTO settings VALUES (?, ?)', (name, value))
