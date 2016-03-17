@@ -1,6 +1,6 @@
 import json
 import sqlite3
-
+import datetime
 
 class Database(object):
     datasource = None
@@ -9,6 +9,7 @@ class Database(object):
         super().__init__()
         self.datasource = datasource
         self.datasource.measured.connect(self.on_measured)
+        self.last_store = None
 
         self.db = sqlite3.connect('database.sqlite', isolation_level=None)
         self.upgrade()
@@ -47,7 +48,14 @@ class Database(object):
         return self.db.execute('SELECT value FROM settings WHERE name=?', (name,)).fetchone()
 
     def on_measured(self):
-        # print('measured - store in database')
+        print('measured - check')
+        now = datetime.datetime.now()
+        if self.last_store is not None and (now - self.last_store).seconds < 120:
+            return
+        
+        self.last_store = now
+        print('measured - store in database')
+        
         self.set_temperatures(self.datasource.temperatures)
 
     def get_temperatures(self):
@@ -59,7 +67,7 @@ class Database(object):
 
         history = self.db.execute('SELECT date, value '
                                   'FROM temperatures '
-                                  'WHERE (date BETWEEN ? AND DATETIME(?, "+1 day")) AND (rowid % 12) = 0 '
+                                  'WHERE (date BETWEEN ? AND DATETIME(?, "+1 day"))'
                                   'ORDER BY date', (date_formated, date_formated))
         history = list(json.loads(row[1]) + [row[0]] for row in history)
 
