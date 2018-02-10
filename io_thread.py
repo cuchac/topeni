@@ -49,7 +49,7 @@ class IOThread(Thread):
         self.powerlink = None
 
     def run(self):
-        while not self.stopped or not self.queue.empty():
+        while not self.stopped:
             function, kwargs = self.queue.get()
             try:
                 function(**kwargs)
@@ -117,7 +117,11 @@ class IOThread(Thread):
         data = self.powerlink.read()
 
         total = data['1.8.0']
-        actual = data['31.7']*data['32.7']*data['33.7'] + data['51.7']*data['52.7']*data['53.7'] + data['71.7']*data['72.7']*data['73.7']
+        try:
+            actual = data['31.7']*data['32.7']*data['33.7'] + data['51.7']*data['52.7']*data['53.7'] + data['71.7']*data['72.7']*data['73.7']
+        except Exception as e:
+            print(e, data)
+            raise e
 
         return [actual, total]
 
