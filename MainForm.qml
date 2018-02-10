@@ -277,6 +277,7 @@ Item {
         width: 201
         height: 29
         text: qsTr("Nautila")
+        enabled: !automat.checked && !temperovani.checked
         index: 10
     }
 }
