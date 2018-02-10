@@ -2,7 +2,7 @@ import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
 
-import QuickPlot 1.0
+//import QuickPlot 1.0
 
 Item {
     width: 720
@@ -268,5 +268,15 @@ Item {
             setToday()
             update()
         }
+    }
+
+    EnableButton {
+        id: button5
+        x: 511
+        y: 145
+        width: 201
+        height: 29
+        text: qsTr("Nautila")
+        index: 10
     }
 }

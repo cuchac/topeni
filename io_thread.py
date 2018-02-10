@@ -34,6 +34,7 @@ class IOThread(Thread):
         'C41',  # automatika topi do nadrze
         'S14',  # temperovani
         'C15',  # HDO
+        'C33',  # Nautila
     )
 
     def __init__(self, datasource=None, **kwargs):
