@@ -1,4 +1,4 @@
-from directnet import KSClient
+from directnet import KSNetClient
 from traceback import print_exc
 from queue import Queue
 from threading import Thread
@@ -60,7 +60,7 @@ class IOThread(Thread):
             self.queue.task_done()
 
     def connect(self):
-        self.directnet = KSClient('/dev/topeni_plc')
+        self.directnet = KSNetClient('10.0.0.209', 28784)
 
     def connect_power(self):
         self.powerlink = PowerLink()
