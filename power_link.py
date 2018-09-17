@@ -5,7 +5,7 @@ import re
 
 class PowerLink(object):
     line_re = re.compile(r'(.+)\((.+)\)')
-    float_re = re.compile(r'([0-9\.]+)')
+    float_re = re.compile(r'(-?[0-9\.]+)')
 
     def __init__(self):
 #        self.serial = serial.serial_for_url('rfc2217://10.0.0.6:12346',

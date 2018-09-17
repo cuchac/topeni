@@ -79,7 +79,7 @@ class IOThread(Thread):
             self.queue.put([method, kwargs])
 
     def read_temperatures(self):
-        #print("Reading temperatures")
+        print("Reading temperatures")
 
         temperatures = self.datasource.temperatures
         variables = self.datasource.variables
@@ -91,18 +91,19 @@ class IOThread(Thread):
             for index, address in enumerate(self.VARIABLES):
                 variables[index] = self.directnet.read_int(address)
 
+        print("Reading power")
         if self.powerlink:
             power = self.read_power()
             temperatures[len(self.TEMPERATURES):] = power
 
-        #print("Read temperatures", self.datasource.temperatures)
+        print("Read temperatures", self.datasource.temperatures)
         self.datasource.temperatures = temperatures
         self.datasource.variables = variables
         self.datasource.temperatures_changed.emit()
         self.datasource.variables_changed.emit()
 
     def read_bits(self):
-        #print("Reading bits")
+        print("Reading bits")
 
         bits = self.datasource.bits
 
@@ -110,7 +111,7 @@ class IOThread(Thread):
             for index, address in enumerate(self.BITS):
                 bits[index] = self.directnet.read_bit(address)
 
-        #print("Read bits", self.datasource.bits)
+        print("Read bits", self.datasource.bits)
         self.datasource.bits = bits
         self.datasource.bits_changed.emit()
 
