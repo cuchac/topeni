@@ -18,7 +18,7 @@ class DataSource(QObject):
         # Values
         self._temperatures = [10, 20, 30, 40, 50, 60, 70, 80]
         self._bits = [False, False, False, False, False, False, False, False, False, False, False]
-        self._variables = [10, 20]
+        self._variables = [10, 20, 30, 40]
 
         # Ticking
         self.running = True
@@ -56,7 +56,7 @@ class DataSource(QObject):
         self._bits[index] = value
         self.bits_changed.emit()
 
-    @pyqtSlot(int, bool)
+    @pyqtSlot(int, int)
     def set_variable(self, index, value):
         self.io.add(self.io.write_variable, index=index, value=value)
         self._variables[index] = value

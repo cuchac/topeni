@@ -21,6 +21,8 @@ class IOThread(Thread):
     VARIABLES = (
         'V1773',  # pozadovana teplota
         'V1776',  # maximalni teplota
+        'V2244',  # offset teploty add
+        'V2245',  # offset teploty sub
     )
 
     BITS = (
@@ -155,4 +157,4 @@ class IOThread(Thread):
         self.directnet.write_bit(self.BITS[index], value)
 
     def write_variable(self, index, value):
-        self.directnet.write_value(self.VARIABLES[index], value)
+        self.directnet.write_int(self.VARIABLES[index], value)

@@ -18,6 +18,7 @@ Item {
 
         GridLayout {
             id: gridLayout1
+            rowSpacing: 0
             anchors.bottomMargin: 5
             anchors.rightMargin: 5
             anchors.leftMargin: 5
@@ -31,7 +32,7 @@ Item {
             Label {
                 id: label1
                 text: qsTr("Z TČ")
-                font.pointSize: 14
+                font.pixelSize: 14
             }
 
             ColorRect {
@@ -46,7 +47,7 @@ Item {
             Label {
                 id: label2
                 text: qsTr("Do topení")
-                font.pointSize: 14
+                font.pixelSize: 14
             }
 
             ColorRect {
@@ -61,7 +62,7 @@ Item {
             Label {
                 id: label3
                 text: qsTr("V akumulačce")
-                font.pointSize: 14
+                font.pixelSize: 14
             }
 
             ColorRect {
@@ -76,7 +77,7 @@ Item {
             Label {
                 id: label4
                 text: qsTr("Venkovní")
-                font.pointSize: 14
+                font.pixelSize: 14
             }
 
             ColorRect {
@@ -91,7 +92,7 @@ Item {
             Label {
                 id: label6
                 text: qsTr("Tlak vody")
-                font.pointSize: 14
+                font.pixelSize: 14
             }
 
             ColorRect {
@@ -107,7 +108,7 @@ Item {
             Label {
                 id: label7
                 text: qsTr("Aktuální spotřeba")
-                font.pointSize: 14
+                font.pixelSize: 14
             }
 
             ColorRect {
@@ -135,12 +136,12 @@ Item {
 
         Label {
             id: label8
-            x: -155
-            y: 48
+            x: 98
+            y: 50
             color: "#ea430c"
             text: qsTr("HDO :-(")
             font.bold: true
-            font.pointSize: 24
+            font.pixelSize: 20
             visible: dataSource.bits[9]
         }
 
@@ -280,4 +281,65 @@ Item {
         enabled: !automat.checked && !temperovani.checked
         index: 10
     }
+
+    Rectangle {
+        id: rectangle
+        x: 143
+        y: 56
+        width: 31
+        height: 27
+        color: "#cadefe"
+
+        Text {
+            id: element
+            text: dataSource.variables[2]
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 20
+        }
+    }
+
+    Button {
+        id: teplota_plus
+        x: 174
+        y: 55
+        width: 34
+        height: 31
+        text: qsTr("+")
+        enabled: automat.checked
+        style: Styles.buttonStyle
+        onClicked: dataSource.set_variable(2, dataSource.variables[2]+1)
+    }
+
+    Button {
+        id: teplota_minus
+        x: 108
+        y: 55
+        width: 34
+        height: 31
+        text: qsTr("-")
+        enabled: automat.checked
+        style: Styles.buttonStyle
+        onClicked: dataSource.set_variable(2, dataSource.variables[2]-1)
+    }
+
+    Text {
+        id: element1
+        x: 8
+        y: 61
+        text: qsTr("Doladění teploty")
+        font.pixelSize: 13
+    }
 }
+
+
+
+
+
+
+
+/*##^## Designer {
+    D{i:37;anchors_height:23;anchors_width:50;anchors_x:0;anchors_y:4}
+}
+ ##^##*/

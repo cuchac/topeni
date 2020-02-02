@@ -2,6 +2,7 @@ import json
 import sqlite3
 import datetime
 
+
 class Database(object):
     datasource = None
 
