@@ -17,3 +17,4 @@ TSLIB_CONFFILE=/etc/ts.conf
 TSLIB_CALIBFILE=/etc/pointercal
 TSLIB_PLUGINDIR=/usr/lib/ts
 
+PYTHONUNBUFFERED=1

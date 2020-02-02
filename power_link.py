@@ -35,7 +35,11 @@ class PowerLink(object):
     def parse_line(self, line):
         line = line.decode('ascii')
         match = self.line_re.match(line)
-        return match.groups()
+        if match:
+            return match.groups()
+        else:
+            print('Cannot parse line: ', line)
+            return ('', '')
 
     def read(self):
         data = self.read_data()

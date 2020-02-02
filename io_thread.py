@@ -3,6 +3,8 @@ from traceback import print_exc
 from queue import Queue
 from threading import Thread
 from power_link import PowerLink
+from datetime import datetime
+import time
 
 
 class IOThread(Thread):
@@ -48,6 +50,7 @@ class IOThread(Thread):
         self.stopping = False
         self.directnet = None
         self.powerlink = None
+        self.last_sync = datetime.now()
 
     def run(self):
         while not self.stopped:
@@ -78,6 +81,23 @@ class IOThread(Thread):
         if not self.stopping:
             self.queue.put([method, kwargs])
 
+    def on_timer(self):
+        if self.stopping:
+            return
+
+        timeout = (datetime.now() - self.last_sync).total_seconds()
+        print("Cycle duration", timeout)
+        if timeout < 10:
+            print("Sleeping", 10 - timeout)
+            time.sleep(10 - timeout)
+
+        print("Timer ticking ...")
+        self.last_sync = datetime.now()
+        self.add(self.read_temperatures)
+        self.add(self.read_bits)
+        self.add(self.measured)
+        self.add(self.on_timer)
+ 
     def read_temperatures(self):
         print("Reading temperatures")
 
@@ -118,12 +138,13 @@ class IOThread(Thread):
     def read_power(self):
         data = self.powerlink.read()
 
-        total = data['1.8.0']
         try:
+            total = data['1.8.0']
             actual = data['31.7']*data['32.7']*data['33.7'] + data['51.7']*data['52.7']*data['53.7'] + data['71.7']*data['72.7']*data['73.7']
         except Exception as e:
-            print(e, data)
-            raise e
+            print('Error calculating power', e, data)
+#            raise e
+            return [0, 0]
 
         return [actual, total]
 

@@ -30,7 +30,8 @@ class DataSource(QObject):
         self.io.start()
         self.io.add(self.io.connect)
         self.io.add(self.io.connect_power)
-        self.on_timer()
+        self.io.add(self.io.on_timer)
+#        self.on_timer()
 
     def on_timer(self):
         #print("Timer ticking ...")
