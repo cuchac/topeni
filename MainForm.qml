@@ -301,18 +301,6 @@ Item {
     }
 
     Button {
-        id: teplota_plus
-        x: 174
-        y: 55
-        width: 34
-        height: 31
-        text: qsTr("+")
-        enabled: automat.checked
-        style: Styles.buttonStyle
-        onClicked: dataSource.set_variable(2, dataSource.variables[2]+1)
-    }
-
-    Button {
         id: teplota_minus
         x: 108
         y: 55
@@ -320,8 +308,18 @@ Item {
         height: 31
         text: qsTr("-")
         enabled: automat.checked
-        style: Styles.buttonStyle
         onClicked: dataSource.set_variable(2, dataSource.variables[2]-1)
+    }
+
+    Button {
+        id: teplota_plus
+        x: 174
+        y: 55
+        width: 34
+        height: 31
+        text: qsTr("+")
+        enabled: automat.checked
+        onClicked: dataSource.set_variable(2, dataSource.variables[2]+1)
     }
 
     Text {
@@ -339,7 +337,4 @@ Item {
 
 
 
-/*##^## Designer {
-    D{i:37;anchors_height:23;anchors_width:50;anchors_x:0;anchors_y:4}
-}
- ##^##*/
+
